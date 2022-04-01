@@ -14,7 +14,7 @@ class SimpleReport():
             f"Data de fabricação mais antiga: {min(date_fab)}\n"
             f"Data de validade mais próxima: {min(date_val)}\n"
             "Empresa com maior quantidade de produtos estocados: "
-            f"{mode(big_company)}"
+            f"{mode(big_company)}\n"
         )
 
 # referencies:

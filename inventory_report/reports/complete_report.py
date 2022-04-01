@@ -13,7 +13,7 @@ class CompleteReport():
             list_companies += f"- {company[0]}: {company[1]}\n"
 
         return (
-            f"{simple_report}\n" +
-            "\nProdutos estocados por empresa: \n" +
+            f"{simple_report}\n"
+            f"Produtos estocados por empresa: \n" +
             list_companies
         )
