@@ -17,14 +17,12 @@ class Inventory():
         return Inventory.generate_report(list_products, type)
 # https://www.w3schools.com/python/ref_string_endswith.asp
 
-    # @classmethod
     def generate_report(dict, type):
         if type == "simples":
             return SimpleReport.generate(dict)
         else:
             return CompleteReport.generate(dict)
 
-    # @classmethod
     def csv_read_file(path):
         list_products = []
         with open(path, 'r') as csvfile:
@@ -33,13 +31,11 @@ class Inventory():
                 list_products.append(row)
         return list_products
 
-    # @classmethod
     def json_read_file(path):
         with open(path, 'r') as jsonfile:
             list_products = json.load(jsonfile)
         return list_products
 
-    # @classmethod
     def xml_read_file(path):
         tree = ElementTree.parse(path)
         root = tree.getroot()
