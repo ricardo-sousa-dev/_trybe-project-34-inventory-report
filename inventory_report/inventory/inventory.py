@@ -1,8 +1,8 @@
+from xml.etree import ElementTree
 from inventory_report.reports.simple_report import SimpleReport
 from inventory_report.reports.complete_report import CompleteReport
 import csv
 import json
-from xml.etree import ElementTree
 
 
 class Inventory():
@@ -49,3 +49,4 @@ class Inventory():
 
 # https://omz-software.com/pythonista/docs/ios/xmltodict.html
 # https://linuxhint.com/python_xml_to_dictionary/
+# https://www.datacamp.com/community/tutorials/python-xml-elementtree#rdl
