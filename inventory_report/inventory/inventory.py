@@ -2,29 +2,27 @@ from inventory_report.reports.simple_report import SimpleReport
 from inventory_report.reports.complete_report import CompleteReport
 import csv
 import json
-import xmltodict
+from xml.etree import ElementTree
 
 
-class Inventory:
+class Inventory():
 
-    def import_data(cls, path, type):
+    def import_data(path, type):
         if(path.endswith('.csv')):
-            list_products = cls.csv_read_file(path)
+            list_products = Inventory.csv_read_file(path)
         elif(path.endswith('.json')):
-            list_products = cls.json_read_file(path)
+            list_products = Inventory.json_read_file(path)
         elif(path.endswith('.xml')):
-            list_products = cls.xml_read_file(path)
-        return cls.generate_report(list_products, type)
+            list_products = Inventory.xml_read_file(path)
+        return Inventory.generate_report(list_products, type)
 # https://www.w3schools.com/python/ref_string_endswith.asp
 
-    @classmethod
     def generate_report(dict, type):
         if type == "simples":
             return SimpleReport.generate(dict)
         else:
             return CompleteReport.generate(dict)
 
-    @classmethod
     def csv_read_file(path):
         list_products = []
         with open(path, 'r') as csvfile:
@@ -33,16 +31,21 @@ class Inventory:
                 list_products.append(row)
         return list_products
 
-    @classmethod
     def json_read_file(path):
         with open(path, 'r') as jsonfile:
             list_products = json.load(jsonfile)
         return list_products
 
-    @classmethod
     def xml_read_file(path):
-        with open(path, 'r') as xmlfile:
-            list_products = xmltodict.parse(xmlfile.read())
+        tree = ElementTree.parse(path)
+        root = tree.getroot()
+        list_products = []
+        for inventory in root:
+            list_child = {}
+            for tag_child in inventory:
+                list_child[tag_child.tag] = tag_child.text
+            list_products.append(list_child)
         return list_products
+
 # https://omz-software.com/pythonista/docs/ios/xmltodict.html
 # https://linuxhint.com/python_xml_to_dictionary/
